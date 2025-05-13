@@ -25,10 +25,13 @@ public class AuthorizationConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable)
-                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-                .authorizeHttpRequests(auth -> auth
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()))                .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.OPTIONS, "/api/**").permitAll()
                         .requestMatchers("/public/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/ferramentas/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/ferramentas/**").authenticated()
+                        .requestMatchers(HttpMethod.PUT, "/api/ferramentas/**").authenticated()
+                        .requestMatchers(HttpMethod.DELETE, "/api/ferramentas/**").authenticated()
                         .requestMatchers(HttpMethod.GET, "/api/cursos/**", "/api/avaliacoes/**").authenticated()
                         .requestMatchers(HttpMethod.POST, "/api/cursos/**", "/api/avaliacoes/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PUT, "/api/cursos/**", "/api/avaliacoes/**").hasRole("ADMIN")
