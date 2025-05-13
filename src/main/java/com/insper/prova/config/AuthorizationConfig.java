@@ -54,11 +54,10 @@ public class AuthorizationConfig {
         UrlBasedCorsConfigurationSource src = new UrlBasedCorsConfigurationSource();
         src.registerCorsConfiguration("/**", cfg);
         return src;
-    }
-    @Bean
+    }    @Bean
     public JwtAuthenticationConverter jwtAuthenticationConverter() {
         JwtGrantedAuthoritiesConverter gal = new JwtGrantedAuthoritiesConverter();
-        gal.setAuthoritiesClaimName("https://musica-insper.com/roles");
+        gal.setAuthoritiesClaimName("permissions");
         gal.setAuthorityPrefix("ROLE_");
         JwtAuthenticationConverter conv = new JwtAuthenticationConverter();
         conv.setJwtGrantedAuthoritiesConverter(gal);
