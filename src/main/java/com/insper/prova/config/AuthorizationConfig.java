@@ -28,14 +28,13 @@ public class AuthorizationConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))                .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.OPTIONS, "/api/**").permitAll()
                         .requestMatchers("/public/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/ferramentas/**").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/api/ferramentas/**").authenticated()
-                        .requestMatchers(HttpMethod.PUT, "/api/ferramentas/**").authenticated()
-                        .requestMatchers(HttpMethod.DELETE, "/api/ferramentas/**").authenticated()
-                        .requestMatchers(HttpMethod.GET, "/api/cursos/**", "/api/avaliacoes/**").authenticated()
-                        .requestMatchers(HttpMethod.POST, "/api/cursos/**", "/api/avaliacoes/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.PUT, "/api/cursos/**", "/api/avaliacoes/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.DELETE, "/api/cursos/**", "/api/avaliacoes/**").hasRole("ADMIN")
+                        
+                        // New feedback endpoints
+                        .requestMatchers(HttpMethod.GET, "/api/feedbacks/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/feedbacks/**").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/api/feedbacks/**").permitAll()
+                        .requestMatchers(HttpMethod.DELETE, "/api/feedbacks/**").hasRole("ADMIN")
+                        // Other endpoint
                         .anyRequest().authenticated()
                 )
                 .oauth2ResourceServer(oauth2 -> oauth2
